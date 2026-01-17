@@ -1,21 +1,9 @@
-import zipfile
-import os
+import unittest
+from src.extractor import extract_zip
 
 
-def extract_zip(zip_path: str, extract_to: str) -> list:
-    """
-    Extracts a ZIP file to the given directory.
+class TestExtractor(unittest.TestCase):
 
-    :param zip_path: Path to ZIP file
-    :param extract_to: Directory to extract contents
-    :return: List of extracted file names
-    """
-    if not zipfile.is_zipfile(zip_path):
-        raise Exception("Invalid ZIP file")
-
-    os.makedirs(extract_to, exist_ok=True)
-
-    with zipfile.ZipFile(zip_path, "r") as zip_ref:
-        zip_ref.extractall(extract_to)
-
-    return os.listdir(extract_to)
+    def test_invalid_zip(self):
+        with self.assertRaises(Exception):
+            extract_zip("invalid.txt", "output")
