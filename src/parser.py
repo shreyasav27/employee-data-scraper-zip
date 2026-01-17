@@ -1,13 +1,24 @@
-import unittest
 import pandas as pd
-from src.parser import parse_employee_file
+
+REQUIRED_COLUMNS = [
+    "Employee ID",
+    "First Name",
+    "Last Name",
+    "Email",
+    "Job Title",
+    "Phone Number",
+    "Hire Date",
+]
 
 
-class TestParser(unittest.TestCase):
+def parse_employee_file(file_path: str) -> list:
+    try:
+        df = pd.read_excel(file_path)
+    except Exception as e:
+        raise Exception(f"Unable to read Excel file: {e}")
 
-    def test_missing_columns(self):
-        df = pd.DataFrame({"Employee ID": [1]})
-        df.to_excel("temp.xlsx", index=False)
+    for col in REQUIRED_COLUMNS:
+        if col not in df.columns:
+            raise Exception(f"Missing required column: {col}")
 
-        with self.assertRaises(Exception):
-            parse_employee_file("temp.xlsx")
+    return df.to_dict(orient="records")

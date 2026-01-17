@@ -1,16 +1,13 @@
-import unittest
-from unittest.mock import patch, Mock
-from src.downloader import download_zip
+import requests
 
 
-class TestDownloader(unittest.TestCase):
+def download_zip(url: str, output_path: str) -> str:
+    response = requests.get(url, timeout=10)
 
-    @patch("src.downloader.requests.get")
-    def test_download_success(self, mock_get):
-        mock_response = Mock()
-        mock_response.status_code = 200
-        mock_response.content = b"fake zip content"
-        mock_get.return_value = mock_response
+    if response.status_code != 200:
+        raise Exception(f"Failed to download ZIP. Status: {response.status_code}")
 
-        path = download_zip("http://fake-url", "test.zip")
-        self.assertEqual(path, "test.zip")
+    with open(output_path, "wb") as f:
+        f.write(response.content)
+
+    return output_path
