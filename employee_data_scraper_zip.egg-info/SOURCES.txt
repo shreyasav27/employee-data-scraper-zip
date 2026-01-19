@@ -1,0 +1,15 @@
+README.md
+setup.py
+employee_data_scraper_zip.egg-info/PKG-INFO
+employee_data_scraper_zip.egg-info/SOURCES.txt
+employee_data_scraper_zip.egg-info/dependency_links.txt
+employee_data_scraper_zip.egg-info/top_level.txt
+src/__init__.py
+src/downloader.py
+src/extractor.py
+src/parser.py
+src/scraper.py
+tests/__init__.py
+tests/test_downloader.py
+tests/test_extractor.py
+tests/test_parser.py
