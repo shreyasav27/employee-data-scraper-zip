@@ -1,10 +1,7 @@
 import unittest
-<<<<<<< Updated upstream
-=======
 import os
 import zipfile
 import pandas as pd
->>>>>>> Stashed changes
 from src.extractor import extract_zip
 
 
@@ -13,8 +10,6 @@ class TestExtractor(unittest.TestCase):
     def test_invalid_zip_raises_exception(self):
         with self.assertRaises(Exception):
             extract_zip("not_a_zip.txt", "output")
-<<<<<<< Updated upstream
-=======
 
     def test_valid_zip_extracts_excel(self):
         zip_path = "test.zip"
@@ -45,4 +40,3 @@ class TestExtractor(unittest.TestCase):
         for file in extracted_files:
             os.remove(os.path.join(output_dir, file))
         os.rmdir(output_dir)
->>>>>>> Stashed changes
