@@ -29,6 +29,43 @@ class TestParser(unittest.TestCase):
             file_name.endswith(".xlsx"),
             "File is not in Excel format"
         )
+    def test_valid_data_structure(self):
+        df = pd.DataFrame({
+            "Employee ID": [1],
+            "First Name": ["John"],
+            "Last Name": ["Doe"],
+            "Email": ["john@example.com"],
+            "Job Title": ["Engineer"],
+            "Phone Number": ["1234567890"],
+            "Hire Date": ["2022-01-01"]
+        })
 
-    
+        file_name = "valid.xlsx"
+        df.to_excel(file_name, index=False)
+
+        try:
+            result = parse_employee_file(file_name)
+            self.assertIsNotNone(result)
+        finally:
+            os.remove(file_name)
+
 >>>>>>> Stashed changes
+    def test_invalid_email_data(self):
+        df = pd.DataFrame({
+            "Employee ID": [1],
+            "First Name": ["John"],
+            "Last Name": ["Doe"],
+            "Email": ["invalid-email"],
+            "Job Title": ["Engineer"],
+            "Phone Number": ["1234567890"],
+            "Hire Date": ["2022-01-01"]
+        })
+
+        file_name = "invalid_email.xlsx"
+        df.to_excel(file_name, index=False)
+
+        try:
+            with self.assertRaises(Exception):
+                parse_employee_file(file_name)
+        finally:
+            os.remove(file_name)
