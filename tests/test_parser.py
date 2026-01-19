@@ -15,6 +15,13 @@ class TestParser(unittest.TestCase):
             parse_employee_file(file_name)
 
         os.remove(file_name)
+    def test_excel_file_format(self):
+        file_name = "EmployeeSampleData.xlsx"
+        self.assertTrue(
+            file_name.endswith(".xlsx"),
+            "File is not in Excel format"
+        )
+
     def test_valid_data_structure(self):
         df = pd.DataFrame({
             "Employee ID": [1],
