@@ -11,7 +11,24 @@ class TestParser(unittest.TestCase):
         file_name = "temp.xlsx"
         df.to_excel(file_name, index=False)
 
+<<<<<<< Updated upstream
         with self.assertRaises(Exception):
             parse_employee_file(file_name)
 
         os.remove(file_name)
+=======
+        try:
+            with self.assertRaises(Exception):
+                parse_employee_file(file_name)
+        finally:
+            os.remove(file_name)
+
+    def test_excel_file_format(self):
+        file_name = "EmployeeSampleData.xlsx"
+        self.assertTrue(
+            file_name.endswith(".xlsx"),
+            "File is not in Excel format"
+        )
+
+    
+>>>>>>> Stashed changes

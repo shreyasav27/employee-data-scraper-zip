@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import pandas as pd
 
 REQUIRED_COLUMNS = [
